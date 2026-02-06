@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Doc Sanitizer (PoC)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🧼 Doc Sanitizer</div>
+    <div class="sub">Upload → Replace words → Download clean PDF</div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>1) Upload PDF</h2>
+
+      <label class="filebox">
+        <input id="file" type="file" accept="application/pdf" />
+        <span>Choose PDF</span>
+      </label>
+
+      <h2>2) Replacements</h2>
+      <p class="hint">Add pairs like <code>John Doe → Client A</code>. We replace exact text matches.</p>
+
+      <div id="pairs"></div>
+
+      <div class="row">
+        <button id="addPair" class="btn secondary">+ Add replacement</button>
+        <button id="submit" class="btn primary">🚀 Sanitize</button>
+      </div>
+
+      <div id="toast" class="toast hidden"></div>
+    </section>
+
+    <section class="card">
+      <div class="row space">
+        <h2>History</h2>
+        <button id="refresh" class="btn ghost">↻ Refresh</button>
+      </div>
+      <div id="history" class="history"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

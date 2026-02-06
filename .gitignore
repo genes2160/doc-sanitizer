@@ -1,0 +1,12 @@
+# python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# runtime data
+data/app.sqlite
+data/uploads/*
+data/outputs/*
+
+!.gitkeep
