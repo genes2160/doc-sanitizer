@@ -7,7 +7,8 @@ from typing import Dict, Optional
 
 import aiofiles
 from fastapi import FastAPI, UploadFile, File, Form, BackgroundTasks, HTTPException, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 from .logging_conf import setup_logging
@@ -104,6 +105,24 @@ def create_app() -> FastAPI:
         except Exception as e:
             log.exception(f"[PROCESS] failed submission_id={submission_id}")
             update_status(submission_id, "failed", output_path=None, error=str(e))
+
+    #--- FRONTEND SERVING (HTML + JS + CSS) ---
+
+    BASE_DIR = Path(__file__).resolve().parents[2]   # doc-sanitizer/
+    FRONTEND_DIR = BASE_DIR / "frontend"
+
+    # Serve CSS / JS
+    app.mount(
+        "/static",
+        StaticFiles(directory=FRONTEND_DIR),
+        name="static",
+    )
+
+    # Serve index.html at /
+    @app.get("/", response_class=HTMLResponse)
+    def serve_frontend():
+        index_file = FRONTEND_DIR / "index.html"
+        return index_file.read_text(encoding="utf-8")
 
     @app.get("/api/health")
     def health():

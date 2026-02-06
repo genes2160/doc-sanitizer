@@ -50,3 +50,14 @@ Designed to help users share documents with AI without leaking private info.
 ## Logging & Debugging
 - Every request returns `x-request-id`
 - Server logs include the request-id and processing steps
+
+
+```
+cd backend
+python -m venv .venv
+# windows: .venv\Scripts\activate
+source .venv/bin/activate
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload --port 8000
+```

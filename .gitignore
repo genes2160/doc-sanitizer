@@ -9,4 +9,9 @@ data/app.sqlite
 data/uploads/*
 data/outputs/*
 
+# runtime data
+backend/data/app.sqlite
+backend/data/uploads/*
+backend/data/outputs/*
+
 !.gitkeep
